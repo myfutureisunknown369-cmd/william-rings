@@ -374,3 +374,50 @@ setTimeout(function() {
     console.log('✅ Wikipedia search override activated');
 })();
 
+
+// ===== نظام التحديث الشامل =====
+window.WilliamUpdater = {
+    updateStyle: function(newCSS) {
+        localStorage.setItem('william_style', newCSS);
+        var style = document.getElementById('dynamic-style');
+        if (!style) {
+            style = document.createElement('style');
+            style.id = 'dynamic-style';
+            document.head.appendChild(style);
+        }
+        style.textContent = newCSS;
+        return 'تم تحديث CSS';
+    },
+        updateApp: function(newCode) {
+        localStorage.setItem('william_app_patch', newCode);
+        return 'تم حفظ الكود';
+    },
+    
+    updateHTML: function(newHTML) {
+        localStorage.setItem('william_html_patch', newHTML);
+        return 'تم حفظ HTML';
+    },
+    
+    reset: function() {
+        localStorage.removeItem('william_style');
+        localStorage.removeItem('william_app_patch');
+        localStorage.removeItem('william_html_patch');
+        return 'تمت الاستعادة';
+    }
+};
+
+// ===== تحميل التحديثات المحفوظة عند البدء =====
+setTimeout(function() {
+    var savedStyle = localStorage.getItem('william_style');
+    if (savedStyle) {
+        var s = document.createElement('style');
+        s.id = 'dynamic-style';
+        s.textContent = savedStyle;
+        document.head.appendChild(s);
+    }
+    var savedPatch = localStorage.getItem('william_app_patch');
+    if (savedPatch) {
+        try { eval(savedPatch); } catch(e) {}
+    }
+    console.log('✅ نظام التحديث الشامل جاهز');
+}, 1500);
