@@ -341,7 +341,7 @@ try {
     }
 }
 
-// ===== تشغيل الكود المخصص عند البدء =====
+// ===== تشغيل الكود المخصص عند البدء ===== 
 setTimeout(function() {
     const saved = localStorage.getItem('william_custom_code');
     if (saved) {
