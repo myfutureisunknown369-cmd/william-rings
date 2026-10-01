@@ -305,3 +305,51 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // تحديث الإحصائيات فوراً
 if (typeof updateStats === 'function') updateStats();
+
+// ===== نظام التحديث الذاتي =====
+function selfUpdate() {
+    const editor = document.getElementById('code-editor');
+    if (!editor) {
+        alert('المحرر غير موجود');
+        return;
+    }
+    
+    const newCode = editor.value.trim();
+    if (!newCode) {
+        alert('اكتب الكود أولاً في المحرر');
+        return;
+    }
+    
+if (!confirm('🚀 هل تريد تحديث الكيان بهذا الكود؟\n\nسيُحفظ الكود الجديد ويُشغّل فوراً.')) {
+    return;
+}
+
+try {
+    new Function(newCode);
+    localStorage.setItem('william_custom_code', newCode);
+    eval(newCode);
+    
+    if (typeof william !== 'undefined') {
+        william.logAdd('🚀 تم التحديث الذاتي بنجاح');
+    }
+            
+        alert('✅ تم التحديث!\nالكود الجديد يعمل الآن.');
+        updateStats();
+        
+    } catch(e) {
+        alert('❌ خطأ في الكود:\n' + e.message);
+    }
+}
+
+// ===== تشغيل الكود المخصص عند البدء =====
+window.addEventListener('load', function() {
+    const saved = localStorage.getItem('william_custom_code');
+    if (saved) {
+        try {
+            eval(saved);
+            console.log('✅ تم تحميل التحديث الذاتي');
+        } catch(e) {
+            console.error('❌ خطأ في التحديث:', e);
+        }
+    }
+});
