@@ -342,7 +342,7 @@ try {
 }
 
 // ===== تشغيل الكود المخصص عند البدء =====
-window.addEventListener('load', function() {
+setTimeout(function() {
     const saved = localStorage.getItem('william_custom_code');
     if (saved) {
         try {
@@ -352,7 +352,7 @@ window.addEventListener('load', function() {
             console.error('❌ خطأ في التحديث:', e);
         }
     }
-});
+}, 1000);
 
 // ===== إصلاح البحث المضمون =====
 (function() {
