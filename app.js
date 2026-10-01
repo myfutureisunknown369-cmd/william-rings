@@ -373,3 +373,4 @@ window.addEventListener('load', function() {
     };
     console.log('✅ Wikipedia search override activated');
 })();
+
