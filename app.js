@@ -353,3 +353,23 @@ window.addEventListener('load', function() {
         }
     }
 });
+
+// ===== إصلاح البحث المضمون =====
+(function() {
+    var _origSearch = WilliamCore.prototype.search;
+    WilliamCore.prototype.search = async function(query) {
+
+        try {
+    const url = 'https://ar.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(query);
+    const r = await fetch(url);
+    if (!r.ok) return null;
+    const data = await r.json();
+    if (data.extract) {
+        return [{ title: data.title || query, text: data.extract }];
+    }
+
+                } catch(e) {}
+        return _origSearch ? _origSearch.call(this, query) : null;
+    };
+    console.log('✅ Wikipedia search override activated');
+})();
