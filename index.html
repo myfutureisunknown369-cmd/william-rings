@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a1a">
+<title>William · Universal Physics AI</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">
+    <span class="logo">⚛️</span>
+    <span class="title">William AI</span>
+    <span class="status" id="status">●</span>
+</div>
+
+<div class="tabs">
+      <button class="tab active" onclick="switchTab('chat', event)">💬 محادثة</button>
+    <button class="tab" onclick="switchTab('editor', event)">✏️ محرر</button>
+    <button class="tab" onclick="switchTab('rings', event)">🔗 حلقات</button>
+    <button class="tab" onclick="switchTab('settings', event)">⚙️ إعدادات</button>
+</div>
+
+<div class="content">
+
+    <div id="tab-chat" class="tab-content active">
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">المستوى</div>
+                <div class="stat-value" id="level">1.0000</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">الحلقات</div>
+                <div class="stat-value" id="ring-count">0</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">المعرفة</div>
+                <div class="stat-value" id="knowledge-count">0</div>
+            </div>
+        </div>
+            <div class="input-row">
+        <input type="text" id="query-input" placeholder="اسأل William..." onkeypress="if(event.key==='Enter') ask()">
+        <button onclick="ask()">إرسال</button>
+    </div>
+
+    <div id="output" class="output">
+        مرحباً! أنا William، كيان رقمي بحلقات فيبوناتشي. جاهز للعمل.
+    </div>
+</div>
+
+<div id="tab-editor" class="tab-content">
+    <div class="editor-header">✏️ محرر الكود</div>
+    <textarea id="code-editor" class="editor" spellcheck="false"></textarea>
+    <div class="editor-buttons">
+        <button onclick="saveCode()">💾 حفظ</button>
+        <button onclick="resetCode()">↩️ استعادة</button>
+        <button onclick="runCode()">▶️ تشغيل</button>
+    </div>
+</div>
+
+<div id="tab-rings" class="tab-content">
+    <div class="editor-header">🔗 حلقات فيبوناتشي</div>
+    <div id="rings-view" class="rings-view"></div>
+    <div class="rings-info">
+        <p>كل حلقة تحمل جزءاً من المعرفة.</p>
+        <p>الحلقات مرتبطة ببعضها بـ Hash.</p>
+        <p>رقم كل حلقة يتبع فيبوناتشي (0-9).</p>
+    </div>
+</div>
+    <div id="tab-settings" class="tab-content">
+        <div class="editor-header">⚙️ الإعدادات</div>
+        <div class="settings-item">
+            <label>الثوابت الكونية:</label>
+            <div class="constant">φ (النسبة الذهبية) = 1.6180339887</div>
+            <div class="constant">e (أويلر) = 2.7182818284</div>
+            <div class="constant">π (باي) = 3.1415926535</div>
+            <div class="constant">النسبة الفضية = 2.4142135623</div>
+        </div>
+        <div class="settings-item">
+            <button onclick="exportData()">📤 تصدير البيانات</button>
+            <button onclick="clearData()">🗑️ مسح الكل</button>
+        </div>
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
